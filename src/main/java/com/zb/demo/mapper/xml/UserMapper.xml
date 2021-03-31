@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.demo.mapper.UserMapper">
+    
+	<sql id="demoUser">
+	   a.id,
+	   a.NAME,
+	   a.pwd,
+	   a.sex,
+	   a.DATE,
+	   a.loginNumber,
+	   a.role
+	</sql>
+	
+	<sql id="demoRole">
+		left join roleTest r on r.id = a.role
+	</sql>
+	
+    
+	<select id="get" resultType="UserTest" >
+		SELECT 
+			<include refid="demoUser"/>
+		FROM userTest a
+		<include refid="demoRole"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="userFindList" resultType="UserTest" >
+		SELECT 
+			<include refid="demoUser"/>
+		FROM userTest a
+		<include refid="demoRole"/>
+<!--		<where>-->
+<!--			a.del_flag = #{DEL_FLAG_NORMAL}-->
+<!--			${dataScope}-->
+<!--			AND a.create_by = #{createBy.no}-->
+<!--			<if test="moderator != null and moderator != ''">-->
+<!--				AND a.moderator LIKE-->
+<!--				<if test="_databaseId == 'postgre'">'%'||#{moderator}||'%'</if>-->
+<!--				<if test="_databaseId == 'oracle'">'%'||#{moderator}||'%'</if>-->
+<!--				<if test="_databaseId == 'mssql'">'%'+#{moderator}+'%'</if>-->
+<!--				<if test="_databaseId == 'mysql'">concat('%',#{moderator},'%')</if>-->
+<!--			</if>-->
+<!--		</where>-->
+<!--		<choose>-->
+<!--			<when test="page !=null and page.orderBy != null and page.orderBy != ''">-->
+<!--				ORDER BY ${page.orderBy}-->
+<!--			</when>-->
+<!--			<otherwise>-->
+<!--				ORDER BY a.update_date DESC-->
+<!--			</otherwise>-->
+<!--		</choose>-->
+	</select>
+
+
+
+</mapper>
