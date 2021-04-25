@@ -9,5 +9,6 @@ package com.zb.demo.web;
 public class Test {
     public static void main(String[] args) {
         System.out.println("在干嘛呢");
+        int a = 10;
     }
 }
